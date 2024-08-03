@@ -56,8 +56,6 @@ public class 토마토_7576 {
 					q.add(new int[] {ny, nx});
 				}
 
-
-
 			}
 
 			if (!q.isEmpty()) {

@@ -1,5 +1,4 @@
-package Simulation.silver;
-
+package Array.gold;
 /*
  1. 야구 게임에 사용할 수 있는 모든 수 저장
  2. 스코어 셋 클래스와 각 수를 비교해서 일치하는 숫자를 카운트
@@ -8,7 +7,7 @@ package Simulation.silver;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Programmers_2503 {
+public class 숫자야구_2503 {
     static int N;
 
     public static void main(String[] args) {

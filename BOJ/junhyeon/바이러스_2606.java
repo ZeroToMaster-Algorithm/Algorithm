@@ -1,4 +1,3 @@
-package com.pass.study;
 
 import java.io.BufferedReader;
 import java.io.IOException;

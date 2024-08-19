@@ -1,4 +1,4 @@
-package Simulation.silver;
+package Array.gold;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *  .뒤에는 확장자
  *
  */
-public class Programmers_1032 {
+public class 명령프롬프트_1032 {
     static int N;
     static ArrayList<String> list;
     public static void main(String[] args) throws IOException {

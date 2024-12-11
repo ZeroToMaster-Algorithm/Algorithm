@@ -1,0 +1,48 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String input1 = br.readLine();
+        String input2 = br.readLine();
+
+        String[] split1 = input1.split(":");
+        String[] split2 = input2.split(":");
+
+        int[] arr1 = new int[split1.length];
+        int[] arr2 = new int[split2.length];
+
+        for (int i = 0; i < split1.length; i++) {
+            arr1[i] = Integer.parseInt(split1[i]);
+            arr2[i] = Integer.parseInt(split2[i]);
+        }
+
+        if (arr2[2] < arr1[2]) {
+            arr2[2] = arr2[2] + 60;
+            arr2[1] = arr2[1] - 1;
+        }
+
+        if (arr2[1] < arr1[1]) {
+            arr2[1] = arr2[1] + 60;
+            arr2[0] = arr2[0] - 1;
+        }
+
+        if (arr2[0] == 0) {
+            arr2[0] = arr2[0] + 24;
+        }
+
+        if (arr2[0] < arr1[0]) {
+            arr2[0] = arr2[0] + 24;
+        }
+
+        int hours = arr2[0] - arr1[0];
+        int minutes = arr2[1] - arr1[1];
+        int seconds = arr2[2] - arr1[2];
+
+        System.out.printf("%02d:%02d:%02d", hours, minutes, seconds);
+    }
+}

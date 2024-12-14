@@ -1,0 +1,49 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        
+
+        // split 이용하지 않고 공백 기준으로 나누기
+        int N = Integer.parseInt(st.nextToken()); 
+        int M = Integer.parseInt(st.nextToken()); 
+        
+
+        char[][] arr = new char[N][M];
+        boolean[] a = new boolean[N];
+        boolean[] b = new boolean[M];
+        
+        for (int i = 0; i < N; i++) {
+            String line = br.readLine();
+            for (int j = 0; j < M; j++) {
+                
+                arr[i][j] = line.charAt(j);
+                if (arr[i][j] == 'X') {
+                    a[i] = true;
+                    b[j] = true;
+                }
+            }
+        }
+        
+        int count_a = 0;
+        int count_b = 0;
+        
+        for (int i = 0; i < N; i++) {
+            if (!a[i])
+                count_a = count_a + 1;
+        }
+        
+        for (int j = 0; j < M; j++) {
+            if (!b[j]) 
+                count_b = count_b + 1;
+        }
+        
+        System.out.println(Math.max(count_a, count_b));
+        
+    }
+}

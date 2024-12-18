@@ -1,0 +1,86 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        char[][] arr = new char[n][n];
+        int max = 0;
+
+        for (int i = 0; i < n; i++) {
+            String str = br.readLine();
+            for (int j = 0; j < n; j++) {
+                arr[i][j] = str.charAt(j);
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (j + 1 < n) { // 가로 인접한 사탕 스왑
+                    char temp = arr[i][j];
+                    arr[i][j] = arr[i][j + 1];
+                    arr[i][j + 1] = temp;
+
+                    int rowMax = getMax(arr, n);
+                    if (rowMax > max) {
+                        max = rowMax;
+                    }
+
+                    arr[i][j + 1] = arr[i][j];
+                    arr[i][j] = temp;
+                }
+                if (i + 1 < n) { // 세로 인접한 사탕 스왑
+                    char temp = arr[i][j];
+                    arr[i][j] = arr[i + 1][j];
+                    arr[i + 1][j] = temp;
+
+                    int colMax = getMax(arr, n);
+                    if (colMax > max) {
+                        max = colMax;
+                    }
+
+                    arr[i + 1][j] = arr[i][j];
+                    arr[i][j] = temp;
+                }
+            }
+        }
+        System.out.println(max);
+    }
+
+    static int getMax(char[][] arr, int n) {
+        int max = 1;
+
+        // 각 행에서 연속된 사탕 검사
+        for (int i = 0; i < n; i++) {
+            int rowCount = 1; 
+            for (int j = 1; j < n; j++) {
+                if (arr[i][j] == arr[i][j - 1]) {
+                    rowCount++;
+                } else {
+                    rowCount = 1;
+                }
+                if (rowCount > max) {
+                    max = rowCount;
+                }
+            }
+        }
+
+        // 각 열에서 연속된 사탕 검사
+        for (int i = 0; i < n; i++) {
+            int colCount = 1;
+            for (int j = 1; j < n; j++) {
+                if (arr[j][i] == arr[j - 1][i]) {
+                    colCount++;
+                } else {
+                    colCount = 1;
+                }
+                if (colCount > max) {
+                    max = colCount;
+                }
+            }
+        }
+
+        return max;
+    }
+}

@@ -1,0 +1,79 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        
+         
+        //str을 char로 하나씩 읽는다
+        // U, D 은 ㅣ로 표시되고 배열이 위, 아래로 움직인다
+        // l, R은 ㅡ로 표시되고 배열이 좌우로 움직인다
+        // 만나는지점은 +로 된다
+        // 경계를 넘어간다면 그 값은 무시한다
+        
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int n = Integer.parseInt(br.readLine());
+        String m = br.readLine();
+
+        boolean[][] p = new boolean[n][n]; // 수직
+        boolean[][] h = new boolean[n][n]; // 수평
+
+        int row = 0, col = 0;
+
+        for (char command : m.toCharArray()) {
+            if (command == 'U') {
+                if (!isValidLocation(row - 1, col, n)) {
+                    continue;
+                }
+                p[row][col] = true;
+                row -= 1;
+                p[row][col] = true;
+            } else if (command == 'D') {
+                if (!isValidLocation(row + 1, col, n)) {
+                    continue;
+                }
+                p[row][col] = true;
+                row += 1;
+                p[row][col] = true;
+            } else if (command == 'L') {
+                if (!isValidLocation(row, col - 1, n)) {
+                    continue;
+                }
+                h[row][col] = true;
+                col -= 1;
+                h[row][col] = true;
+            } else if (command == 'R') {
+                if (!isValidLocation(row, col + 1, n)) {
+                    continue;
+                }
+                h[row][col] = true;
+                col += 1;
+                h[row][col] = true;
+            }
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (p[i][j] && h[i][j]) {
+                    sb.append("+");
+                } else if (p[i][j]) {
+                    sb.append("|");
+                } else if (h[i][j]) {
+                    sb.append("-");
+                } else {
+                    sb.append(".");
+                }
+            }
+            sb.append("\n");
+        }
+
+        System.out.print(sb);
+    }
+
+    private static boolean isValidLocation(int row, int col, int n) {
+        return row >= 0 && row < n && col >= 0 && col < n;
+    }
+}
